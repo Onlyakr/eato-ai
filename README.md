@@ -1,36 +1,196 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍽️ Eato: AI Food Idea Generator
 
-## Getting Started
+> Your personal AI-powered food companion that helps you decide what to eat with personalized suggestions based on your cravings, cuisine preferences, and dietary restrictions.
 
-First, run the development server:
+[![Next.js](https://img.shields.io/badge/Next.js-15.4.5-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.1.0-blue?style=flat-square&logo=react)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1.11-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Features
+
+### 🤖 AI-Powered Food Suggestions
+
+- Get personalized food recommendations using OpenAI GPT-4
+- Input your cravings, cuisine preferences, or dietary restrictions
+- Receive detailed dish descriptions with ingredients and cooking tips
+
+### 🎯 Smart Filtering System
+
+- Filter by cuisine type (Italian, Thai, Mexican, etc.)
+- Filter by spiciness level
+- Filter by dietary preferences (vegetarian, vegan, gluten-free, etc.)
+- Filter by meal type (breakfast, lunch, dinner, snacks)
+
+### 🔄 Regenerate Suggestions
+
+- Not satisfied with the current suggestions? Generate new ones instantly
+- Save your favorite dishes for future reference
+- Build your personal food library
+
+### 👤 User Authentication
+
+- Secure authentication with BetterAuth
+- Sign up with email/password or Google OAuth
+- Save and manage your favorite dishes
+- Personalized experience across devices
+
+### 📱 Responsive Design
+
+- Beautiful, modern UI built with Shadcn/ui components
+- Fully responsive design that works on all devices
+- Dark/light mode support
+- Smooth animations and transitions
+
+### 🌍 Multi-language Support (Coming Soon)
+
+- Support for Thai and English languages
+- Localized food suggestions and interface
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- **[Next.js 15](https://nextjs.org/)** - React framework with App Router
+- **[React 19](https://reactjs.org/)** - UI library
+- **[TypeScript](https://www.typescriptlang.org/)** - Type safety
+- **[Tailwind CSS 4](https://tailwindcss.com/)** - Utility-first CSS framework
+- **[Shadcn/ui](https://ui.shadcn.com/)** - Beautiful UI components built on Radix UI
+
+### Backend & Database
+
+- **[BetterAuth](https://better-auth.com/)** - Modern authentication solution
+- **[Drizzle ORM](https://orm.drizzle.team/)** - Type-safe database ORM
+- **[Neon](https://neon.tech/)** - Serverless PostgreSQL database
+- **[OpenAI API](https://openai.com/)** - GPT-4 for AI food suggestions
+
+### State Management & Tools
+
+- **[Zustand](https://zustand-demo.pmnd.rs/)** - Lightweight state management
+- **[React Hook Form](https://react-hook-form.com/)** - Form handling
+- **[Zod](https://zod.dev/)** - Schema validation
+- **[Lucide React](https://lucide.dev/)** - Beautiful icons
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm (recommended) or npm
+- Neon PostgreSQL database
+- OpenAI API key
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/yourusername/eato.git
+   cd eato
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   pnpm install
+   ```
+
+3. **Set up environment variables**
+
+   ```bash
+   cp .env.example .env.local
+   ```
+
+   Fill in your environment variables:
+
+   ```env
+   # Database
+   DATABASE_URL="postgresql://user:password@host:port/database"
+
+   # Authentication
+   BETTER_AUTH_SECRET="your-secret-key"
+   GOOGLE_CLIENT_ID="your-google-client-id"
+   GOOGLE_CLIENT_SECRET="your-google-client-secret"
+
+   # OpenAI
+   OPENAI_API_KEY="your-openai-api-key"
+   ```
+
+4. **Set up the database**
+
+   ```bash
+   pnpm db:generate
+   pnpm db:push
+   ```
+
+5. **Run the development server**
+
+   ```bash
+   pnpm dev
+   ```
+
+6. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 📁 Project Structure
+
+```
+eato/
+├── app/                    # Next.js App Router pages
+│   ├── (auth)/            # Authentication routes
+│   ├── api/               # API routes
+│   └── globals.css        # Global styles
+├── components/             # React components
+│   ├── header/            # Header components
+│   └── ui/                # Shadcn/ui components
+├── db/                    # Database configuration
+│   ├── index.ts           # Database connection
+│   └── schema.ts          # Database schema
+├── hooks/                 # Custom React hooks
+├── lib/                   # Utility libraries
+│   ├── auth.ts            # BetterAuth configuration
+│   └── utils.ts           # Utility functions
+└── public/                # Static assets
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔧 Available Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm lint` - Run ESLint
+- `pnpm db:generate` - Generate database migrations
+- `pnpm db:push` - Push schema changes to database
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌐 Deployment
 
-## Learn More
+### Vercel (Recommended)
 
-To learn more about Next.js, take a look at the following resources:
+1. Connect your GitHub repository to Vercel
+2. Add environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Other Platforms
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The app can be deployed to any platform that supports Next.js:
 
-## Deploy on Vercel
+- Netlify
+- Railway
+- DigitalOcean App Platform
+- AWS Amplify
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🤝 Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+**Made with ❤️ by the Eato team**
