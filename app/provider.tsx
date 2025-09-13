@@ -1,4 +1,5 @@
-import { ThemeProvider } from "@/components/provider/theme-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { DishesStoreProvider } from "@/components/providers/dishes-store-provider";
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -8,7 +9,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
       enableSystem
       disableTransitionOnChange
     >
-      {children}
+      <DishesStoreProvider>{children}</DishesStoreProvider>
     </ThemeProvider>
   );
 };

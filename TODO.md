@@ -4,22 +4,22 @@ A prioritized checklist to reach a functional MVP and beyond. Check tasks as you
 
 ### P0 – Core MVP (Auth, DB, AI suggestions)
 
-- [ ] Complete auth flows (BetterAuth)
-  - [ ] Implement email/password sign-in in `components/auth/SignInForm.tsx`
-  - [ ] Build `SignUpForm` and wire it to BetterAuth
-  - [ ] Add Google OAuth sign-in on sign-in/sign-up pages
-  - [ ] Protect authenticated routes (e.g., `app/saved/page.tsx`) and redirect unauthenticated users to `/signin`
-  - [ ] Add `BETTER_AUTH_URL` to environment variables and load it in `lib/auth-client.ts`
-- [ ] Fix header auth UX
-  - [ ] Replace placeholder `Logo` text in `components/header/Logo.tsx` with brand mark/text
-  - [ ] Replace placeholder `UserProfile` UI with avatar/name menu
-  - [ ] Verify `SignOutButton` flow; redirect after sign-out reliably
-- [ ] Database: add domain models and migrations
-  - [ ] Add `dish` table (id, title, description, ingredients, cuisine, spiciness, diet, createdAt)
-  - [ ] Add `saved_dish` table (id, userId → `user.id`, dishId → `dish.id`, createdAt)
-  - [ ] Generate and push migrations with Drizzle Kit
-- [ ] AI suggestions API
-  - [ ] Create API route `app/api/suggestions/route.ts` that calls OpenAI (SDK v5) with user prompt + filters
+- [ F ] Complete auth flows (BetterAuth)
+  - [ F ] Implement email/password sign-in in `components/auth/SignInForm.tsx`
+  - [ F ] Build `SignUpForm` and wire it to BetterAuth
+  - [ F ] Add Google OAuth sign-in on sign-in/sign-up pages
+  - [ F ] Protect authenticated routes (e.g., `app/saved/page.tsx`) and redirect unauthenticated users to `/signin`
+  - [ F ] Add `BETTER_AUTH_URL` to environment variables and load it in `lib/auth-client.ts`
+- [ F ] Fix header auth UX
+  - [ F ] Replace placeholder `Logo` text in `components/header/Logo.tsx` with brand mark/text
+  - [ F ] Replace placeholder `UserProfile` UI with avatar/name menu
+  - [ F ] Verify `SignOutButton` flow; redirect after sign-out reliably
+- [ F ] Database: add domain models and migrations
+  - [ F ] Add `dish` table (id, title, description, ingredients, cuisine, spiciness, diet, createdAt)
+  - [ F ] Add `saved_dish` table (id, userId → `user.id`, dishId → `dish.id`, createdAt)
+  - [ F ] Generate and push migrations with Drizzle Kit
+- [ F ] AI suggestions API
+  - [ F ] Create API route `app/api/suggestions/route.ts` that calls OpenAI (SDK v5) with user prompt + filters
   - [ ] Include basic rate-limiting and input validation (Zod)
   - [ ] Return normalized dish objects compatible with DB schema
 

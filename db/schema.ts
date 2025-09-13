@@ -60,7 +60,6 @@ export const verification = pgTable("verification", {
   ),
 });
 
-// id, title, description, ingredients, cuisine, spiciness, diet, createdAt
 export const dish = pgTable("dish", {
   id: text("id").primaryKey(),
   title: text("title").notNull(),
@@ -69,6 +68,19 @@ export const dish = pgTable("dish", {
   cuisine: text("cuisine").notNull(),
   spiciness: text("spiciness").notNull(),
   diet: text("diet").notNull(),
+  createdAt: timestamp("created_at").$defaultFn(
+    () => /* @__PURE__ */ new Date(),
+  ),
+});
+
+export const savedDish = pgTable("saved_dish", {
+  id: text("id").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  dishId: text("dish_id")
+    .notNull()
+    .references(() => dish.id, { onDelete: "cascade" }),
   createdAt: timestamp("created_at").$defaultFn(
     () => /* @__PURE__ */ new Date(),
   ),

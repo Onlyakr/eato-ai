@@ -38,15 +38,21 @@ export const signUpUser = async (
 };
 
 export const getSuggestions = async (prompt: string) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/suggestions`,
-    {
-      method: "POST",
-      body: JSON.stringify({ prompt }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  );
-  return response.json();
+  const baseUrl =
+    process.env.NEXT_PUBLIC_API_URL ||
+    (process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000");
+
+  const res = await fetch(`${baseUrl}/api/suggestions`, {
+    method: "POST",
+    body: JSON.stringify({ prompt }),
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (!res.ok) {
+    const data = await res.json().catch(() => null);
+    throw new Error(data?.error || `Request failed (${res.status})`);
+  }
+  return res.json();
 };
