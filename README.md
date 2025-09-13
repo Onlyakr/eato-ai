@@ -67,9 +67,16 @@
 ### State Management & Tools
 
 - **[Zustand](https://zustand-demo.pmnd.rs/)** - Lightweight state management
-- **[React Hook Form](https://react-hook-form.com/)** - Form handling
+- **[React Hook Form](https://react-hook-form.com/)** - Form handling with validation
 - **[Zod](https://zod.dev/)** - Schema validation
 - **[Lucide React](https://lucide.dev/)** - Beautiful icons
+- **[Sonner](https://sonner.emilkowal.ski/)** - Toast notifications
+
+### Development Tools
+
+- **[ESLint](https://eslint.org/)** - Code linting
+- **[Prettier](https://prettier.io/)** - Code formatting
+- **[Drizzle Kit](https://orm.drizzle.team/kit-docs/)** - Database migrations
 
 ## 🚀 Getting Started
 
@@ -85,8 +92,8 @@
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/eato.git
-   cd eato
+   git clone https://github.com/yourusername/eato-ai.git
+   cd eato-ai
    ```
 
 2. **Install dependencies**
@@ -97,11 +104,7 @@
 
 3. **Set up environment variables**
 
-   ```bash
-   cp .env.example .env.local
-   ```
-
-   Fill in your environment variables:
+   Create a `.env.local` file in the root directory:
 
    ```env
    # Database
@@ -119,8 +122,11 @@
 4. **Set up the database**
 
    ```bash
-   pnpm db:generate
-   pnpm db:push
+   # Generate migrations (if needed)
+   pnpm drizzle-kit generate
+
+   # Push schema to database
+   pnpm drizzle-kit push
    ```
 
 5. **Run the development server**
@@ -135,12 +141,20 @@
 ## 📁 Project Structure
 
 ```
-eato/
+eato-ai/
 ├── app/                    # Next.js App Router pages
 │   ├── (auth)/            # Authentication routes
+│   │   ├── signin/        # Sign in page
+│   │   └── signup/        # Sign up page
 │   ├── api/               # API routes
-│   └── globals.css        # Global styles
+│   │   └── auth/          # Authentication API
+│   ├── dish/              # Dish detail pages
+│   ├── saved/             # Saved dishes page
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Home page
 ├── components/             # React components
+│   ├── auth/              # Authentication components
 │   ├── header/            # Header components
 │   └── ui/                # Shadcn/ui components
 ├── db/                    # Database configuration
@@ -149,7 +163,12 @@ eato/
 ├── hooks/                 # Custom React hooks
 ├── lib/                   # Utility libraries
 │   ├── auth.ts            # BetterAuth configuration
+│   ├── auth-client.ts     # Client-side auth utilities
 │   └── utils.ts           # Utility functions
+├── schema/                # Validation schemas
+│   ├── signInSchema.ts    # Sign in validation
+│   └── signUpSchema.ts    # Sign up validation
+├── drizzle.config.ts      # Drizzle configuration
 └── public/                # Static assets
 ```
 
@@ -159,8 +178,9 @@ eato/
 - `pnpm build` - Build for production
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint
-- `pnpm db:generate` - Generate database migrations
-- `pnpm db:push` - Push schema changes to database
+- `pnpm drizzle-kit generate` - Generate database migrations
+- `pnpm drizzle-kit push` - Push schema changes to database
+- `pnpm drizzle-kit studio` - Open Drizzle Studio (database GUI)
 
 ## 🌐 Deployment
 
@@ -179,6 +199,18 @@ The app can be deployed to any platform that supports Next.js:
 - DigitalOcean App Platform
 - AWS Amplify
 
+## 🔐 Environment Variables
+
+Make sure to set up these environment variables for your deployment:
+
+| Variable               | Description                       | Required |
+| ---------------------- | --------------------------------- | -------- |
+| `DATABASE_URL`         | Neon PostgreSQL connection string | Yes      |
+| `BETTER_AUTH_SECRET`   | Secret key for BetterAuth         | Yes      |
+| `GOOGLE_CLIENT_ID`     | Google OAuth client ID            | Yes      |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth client secret        | Yes      |
+| `OPENAI_API_KEY`       | OpenAI API key for GPT-4          | Yes      |
+
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -186,6 +218,14 @@ The app can be deployed to any platform that supports Next.js:
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+### Development Guidelines
+
+- Follow the existing code style and formatting
+- Add proper TypeScript types
+- Include validation schemas for new forms
+- Test your changes thoroughly
+- Update documentation as needed
 
 ## 📝 License
 

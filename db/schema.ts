@@ -60,4 +60,18 @@ export const verification = pgTable("verification", {
   ),
 });
 
+// id, title, description, ingredients, cuisine, spiciness, diet, createdAt
+export const dish = pgTable("dish", {
+  id: text("id").primaryKey(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  ingredients: text("ingredients").notNull(),
+  cuisine: text("cuisine").notNull(),
+  spiciness: text("spiciness").notNull(),
+  diet: text("diet").notNull(),
+  createdAt: timestamp("created_at").$defaultFn(
+    () => /* @__PURE__ */ new Date(),
+  ),
+});
+
 export const schema = { user, session, account, verification };

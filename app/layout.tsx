@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Raleway } from "next/font/google";
-import Header from "@/components/header/Header";
+import { Toaster } from "@/components/ui/sonner";
+
+import Provider from "./provider";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -29,10 +31,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${raleway.variable} antialiased`}>
-        <div className="flex min-h-svh flex-col">
-          <Header />
-          <main className="flex-1">{children}</main>
-        </div>
+        <Provider>
+          {children}
+          <Toaster />
+        </Provider>
       </body>
     </html>
   );
