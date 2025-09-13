@@ -1,8 +1,9 @@
 "use client";
 
+import { Dish } from "@/stores/dishesStore";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export default function DishCard({ response }: { response: any[] }) {
+export default function DishCard({ response }: { response: Dish[] }) {
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
       {response.map((dish) => (

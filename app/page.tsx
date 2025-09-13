@@ -22,8 +22,8 @@ const HomePage = () => {
           <h1 className="text-3xl font-bold md:text-6xl">What should I eat?</h1>
           <p className="text-muted-foreground md:text-md max-w-2xl text-center text-sm">
             Get personalized food suggestions powered by AI. Tell us your
-            cravings, dietary preferences, or cuisine type, and we'll recommend
-            the perfect meal.
+            cravings, dietary preferences, or cuisine type, and we&apos;ll
+            recommend the perfect meal.
           </p>
 
           <DishGenerator />

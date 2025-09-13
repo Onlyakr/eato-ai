@@ -1,11 +1,19 @@
 import { createStore } from "zustand/vanilla";
 
+export type Dish = {
+  name: string;
+  description: string;
+  cuisine: string;
+  spiciness: string;
+  diet: string;
+};
+
 export type DishesState = {
-  dishes: any[];
+  dishes: Dish[];
 };
 
 export type DishesActions = {
-  setDishes: (dishes: any[]) => void;
+  setDishes: (dishes: Dish[]) => void;
 };
 
 export type DishesStore = DishesState & DishesActions;
@@ -19,6 +27,6 @@ export const createDishesStore = (
 ) => {
   return createStore<DishesStore>()((set) => ({
     ...initState,
-    setDishes: (dishes: any[]) => set({ dishes }),
+    setDishes: (dishes: Dish[]) => set({ dishes }),
   }));
 };
