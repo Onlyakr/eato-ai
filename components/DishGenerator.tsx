@@ -22,11 +22,13 @@ const DishGenerator = () => {
     try {
       setIsLoading(true);
       const data = await getSuggestions(prompt);
-      setDishes(data.dishes);
+      console.log(data.dishes.dishes);
+      setDishes(data.dishes.dishes);
       toast.success("Suggestions fetched successfully");
     } catch (error) {
       const e = error as Error;
-      toast.error(e.message);
+      console.error(e.message);
+      toast.error("Failed to fetch suggestions");
     } finally {
       setIsLoading(false);
     }

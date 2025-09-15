@@ -6,6 +6,7 @@ import { UserProps } from "@/types/userType";
 import Logo from "./Logo";
 import AuthButtons from "./AuthButtons";
 import SignOutButton from "./SignOutButton";
+import Link from "next/link";
 
 const Header = async () => {
   const session = await auth.api.getSession({
@@ -27,6 +28,7 @@ const Header = async () => {
           {/* User Actions */}
           {user ? (
             <div className="flex items-center gap-4">
+              <Link href="/saved"></Link>
               <SignOutButton />
             </div>
           ) : (

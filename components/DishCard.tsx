@@ -7,7 +7,7 @@ export default function DishCard({ response }: { response: Dish[] }) {
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
       {response.map((dish) => (
-        <Card key={dish.name} className="shadow-md">
+        <Card className="shadow-md" key={dish.name}>
           <CardHeader>
             <CardTitle>{dish.name}</CardTitle>
           </CardHeader>
