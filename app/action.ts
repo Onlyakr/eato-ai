@@ -1,6 +1,11 @@
 "use server";
 
 import { auth } from "@/lib/auth";
+import OpenAI from "openai";
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export const signInUser = async (email: string, password: string) => {
   try {
@@ -38,21 +43,37 @@ export const signUpUser = async (
 };
 
 export const getSuggestions = async (prompt: string) => {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_API_URL ||
-    (process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000");
+  try {
+    if (!process.env.OPENAI_API_KEY) {
+      throw new Error("Server misconfigured: missing OPENAI_API_KEY");
+    }
 
-  const res = await fetch(`${baseUrl}/api/suggestions`, {
-    method: "POST",
-    body: JSON.stringify({ prompt }),
-    headers: { "Content-Type": "application/json" },
-  });
+    if (typeof prompt !== "string" || !prompt.trim()) {
+      throw new Error("Invalid request: 'prompt' is required");
+    }
 
-  if (!res.ok) {
-    const data = await res.json().catch(() => null);
-    throw new Error(data?.error || `Request failed (${res.status})`);
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        { role: "system", content: "You are a helpful chef assistant." },
+        {
+          role: "user",
+          content: `Suggest 3 dishes based on: ${prompt}.
+          Return JSON with format:
+          [
+            { "name": "Dish name", "description": "Short description", "ingredients": ["item1","item2"], "cuisine": "cuisine", "spiciness": "spiciness", "diet": "diet" }
+          ]`,
+        },
+      ],
+      response_format: { type: "json_object" },
+    });
+
+    const jsonString = completion.choices[0].message.content;
+    const dishes = JSON.parse(jsonString || "[]");
+
+    return { dishes };
+  } catch (error) {
+    const e = error as Error;
+    throw new Error(e.message || "Something went wrong");
   }
-  return res.json();
 };
