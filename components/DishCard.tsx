@@ -12,13 +12,17 @@ export default function DishCard({ response }: { response: Dish[] }) {
             <CardTitle>{dish.name}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="mb-2 text-sm text-gray-600">{dish.description}</p>
+            <p className="text-muted-foreground mb-2 text-sm">
+              {dish.description}
+            </p>
             <h3 className="mb-1 font-semibold">Cuisine:</h3>
-            <p className="mb-2 text-sm text-gray-600">{dish.cuisine}</p>
+            <p className="text-muted-foreground mb-2 text-sm">{dish.cuisine}</p>
             <h3 className="mb-1 font-semibold">Spiciness:</h3>
-            <p className="mb-2 text-sm text-gray-600">{dish.spiciness}</p>
+            <p className="text-muted-foreground mb-2 text-sm">
+              {dish.spiciness}
+            </p>
             <h3 className="mb-1 font-semibold">Diet:</h3>
-            <p className="mb-2 text-sm text-gray-600">{dish.diet}</p>
+            <p className="text-muted-foreground mb-2 text-sm">{dish.diet}</p>
           </CardContent>
         </Card>
       ))}
